@@ -1,0 +1,98 @@
+<div class="table-responsive custom-table">
+    <table class="table table-gridjs">
+        <thead>
+            <tr>
+                @for (column of columns; track column; let idx = $index) {
+                <th
+                    [style]="{
+                            width:
+                                columns.length === idx + 1
+                                    ? '100%'
+                                    : column.width,
+                            justifyContent: column.align,
+                            textAlign: column.align,
+                        }"
+                >
+                    {{ column.title }}
+                </th>
+                }
+            </tr>
+        </thead>
+        @if (dataSource.length > 0) {
+        <tbody
+            [style]="{
+                    height: heigthTable ? heigthTable : '100%',
+                }"
+        >
+            @for (dataItem of dataSource; track dataItem) {
+            <tr (dblclick)="onRowDbClick(dataItem)">
+                @for ( column of columns; track column; let idx = $index ) {
+                <td
+                    [style]="{
+                                    width:
+                                        columns.length === idx + 1
+                                            ? '100%'
+                                            : column.width,
+                                    justifyContent: column.align,
+                                    textAlign: column.align,
+                                }"
+                >
+                    <ng-container *ngIf="column.render; else noColumRender">
+                        <ng-container
+                            [ngTemplateOutlet]="column.render"
+                            [ngTemplateOutletContext]="{ dataItem : dataItem }"
+                        ></ng-container>
+                    </ng-container>
+                    <ng-template #noColumRender>
+                        {{ dataItem[column.dataIndex] }}
+                    </ng-template>
+                </td>
+                }
+            </tr>
+            }
+        </tbody>
+        }
+    </table>
+    @if (dataSource.length === 0) {
+    <p class="h4">No data</p>
+    }
+</div>
+@if (dataSource.length > 0) {
+<div class="row mt-2">
+    <div class="col col-sm-6 d-flex align-items-center">
+        <div
+            class="dataTables_info"
+            id="tickets-table_info"
+            role="status"
+            aria-live="polite"
+        >
+            <strong>{{ pagination.pageIndex * pagination.pageSize }}</strong>
+            in Total:
+            <strong>{{ pagination.total }}</strong>
+        </div>
+        <select
+            class="form-select ms-3"
+            style="width: auto"
+            [(ngModel)]="pagination.pageSize"
+        >
+            <option [ngValue]="10">10 items per page</option>
+            <option [ngValue]="25">25 items per page</option>
+            <option [ngValue]="50">50 items per page</option>
+        </select>
+    </div>
+    <!-- Pagination -->
+    <div class="col col-sm-6 d-flex align-items-center justify-content-end">
+        <ngb-pagination
+            [collectionSize]="pagination.pageIndex"
+            [(page)]="pagination.pageIndex"
+            [pageSize]="pagination.pageSize"
+            [maxSize]="5"
+            [rotate]="true"
+            [ellipses]="false"
+            [boundaryLinks]="true"
+        >
+        </ngb-pagination>
+    </div>
+    <!-- End Pagination -->
+</div>
+}

@@ -1,0 +1,12 @@
+<div>
+    <label>{{ label }}</label>
+    <ng-content></ng-content>
+    <div
+        *ngIf="
+            form.get(name)?.invalid &&
+            (form.get(name)?.touched || form.get('name')?.dirty)
+        "
+    >
+        <small>{{ getErrorMessage(name, label) }}</small>
+    </div>
+</div>

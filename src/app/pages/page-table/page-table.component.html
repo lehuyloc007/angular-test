@@ -1,0 +1,107 @@
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div
+                class="card-body border border-dashed border-end-0 border-start-0"
+            >
+                <div class="row g-3">
+                    <div class="col-4">
+                        <label for="service-name">Tên công ty</label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            id="service-name"
+                            placeholder="Tìm kiếm"
+                        />
+                    </div>
+                    <div class="col-4">
+                        <label for="service-name" class="col-6"
+                            >Mã công ty</label
+                        >
+                        <input
+                            type="text"
+                            class="form-control"
+                            id="service-name"
+                            placeholder="Tìm kiếm"
+                        />
+                    </div>
+                    <div class="col-4">
+                        <label for="service-name">Số điện thoại</label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            id="service-name"
+                            placeholder="Tìm kiếm"
+                        />
+                    </div>
+                    <div class="col-4">
+                        <label for="service-name">Số ĐKKD</label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            id="service-name"
+                            placeholder="Tìm kiếm"
+                        />
+                    </div>
+                    <div class="col-4">
+                        <label for="service-name">Người đại diện</label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            id="service-name"
+                            placeholder="Tìm kiếm"
+                        />
+                    </div>
+                    <div class="col-4">
+                        <div
+                            class="d-flex justify-content-end align-items-end h-100"
+                        >
+                            <button type="submit" class="btn btn-danger">
+                                <i class="ri-search-line search-icon"></i>
+                                Tìm kiếm
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title mb-0 flex-grow-1">Danh sách TCPH</h4>
+            </div>
+            <div class="card-body">
+                <app-table-custom
+                    [columns]="columnInit"
+                    [heigthTable]="'100px'"
+                    [onRowDbClick]="handelClick"
+                    [dataSource]="[
+                        {
+                            index: 1,
+                            name: 'aaaaa'
+                        },
+                        {
+                            index: 2,
+                            name: 'bbbbb'
+                        }
+                    ]"
+                ></app-table-custom>
+            </div>
+            <!-- end card-body -->
+        </div>
+        <!-- end card -->
+    </div>
+    <!-- end col -->
+</div>
+<ng-template #columnAction let-dataItem="dataItem">
+    <div
+        class="las la-pen bg-info p-1 radius rounded text-white fs-6"
+        role="button"
+        (click)="handel(dataItem)"
+    >
+        aaaaaaa
+    </div>
+</ng-template>
